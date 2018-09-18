@@ -1,16 +1,22 @@
 package mark
 
 import (
-	"time"
 	"context"
-	"github.com/prometheus/common/log"
 	"github.com/olivere/elastic"
+	"github.com/prometheus/common/log"
+	"time"
 )
+
+const (
+	Index = "iot"
+	Type  = "log"
+)
+
 
 type ESClient struct {
 	URL      string //es地址
 	Scheme   string //监视时使用的协议，默认是http
-	Es *elastic.Client
+	Es      *elastic.Client
 }
 
 
@@ -48,8 +54,12 @@ func NewESClient(url, scheme string) (*ESClient) {
 
 func (es *ESClient) write(event *event) error{
 	//do send message to es
-
-
+	add, err :=  es.Es.Index().Index(Index).Type(Type).BodyJson(event).Do(context.Background())
+	if err != nil {
+		log.Error("写入es的日志失败:", err)
+		return err
+	}
+	log.Infof("index (%s),type (%s) ,id (%s),result (%s)", add.Index, add.Type, add.Id, add.Result)
 	return nil
 
 }
