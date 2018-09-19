@@ -1,7 +1,7 @@
 mark:
   type: elasticSearch
-  scheme: "http"
-  url:   "http://192.168.1.6:9200"
-  index: "iot"
+  scheme: http
+  url:   http://192.168.1.6:9200
+  index: iot
 
 
