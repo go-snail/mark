@@ -14,6 +14,7 @@ type Feilds map[string]interface{}
 
 type event struct {
 	Value map[string]interface{} `value`
+	TimeStamp time.Time `timestamp`
 }
 
 type reporter struct {
@@ -82,6 +83,7 @@ func (r *reporter) eventLoop() {
 func Mark(feild Feilds) {
 	evt := reg.evtBuf.Get().(*event)
 	evt.Value = feild
+	evt.TimeStamp = time.Now()
 	select {
 	case reg.eventBus <- evt:
 	default:
