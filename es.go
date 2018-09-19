@@ -19,7 +19,7 @@ type ESClient struct {
 }
 
 func NewESClient(index, url, scheme string) *ESClient {
-	log.Infof("url %s scheme %s", url, scheme)
+	log.Infof("index %s url %s scheme %s", index, url, scheme)
 	ctx := context.Background()
 	var err error
 	if scheme == "" {
