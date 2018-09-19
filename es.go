@@ -55,7 +55,7 @@ func NewESClient(index, url, scheme string) *ESClient {
 }
 
 func (es *ESClient) write(event *event) error {
-	add, err := es.Es.Index().Index(Index).Type(Type).BodyJson(event).Do(context.Background())
+	add, err := es.Es.Index().Index(es.Index).Type(Type).BodyJson(event).Do(context.Background())
 	if err != nil {
 		log.Error("写入es的日志失败:", err)
 		return err
