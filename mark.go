@@ -34,18 +34,6 @@ var (
 	}
 )
 
-type Config struct {
-	Url    string
-	Scheme string
-	Index  string
-}
-
-const (
-	Url    = "http://127.0.0.1:9200"
-	Scheme = "http"
-	Index  = "iot"
-)
-
 func Run(i ConfigI) error {
 	reg.writer = i.Init()
 	go reg.eventLoop()

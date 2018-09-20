@@ -11,12 +11,12 @@ const (
 	Type = "log"
 )
 
-type ESClients struct {
+type ESClient struct {
 	Index string
 	Es    *elastic.Client
 }
 
-func NewESClients(es *ESConfig) *ESClients {
+func NewESClients(es *ESConfig) *ESClient {
 	log.Infof("es config %s:", es)
 	ctx := context.Background()
 	var err error
@@ -41,10 +41,10 @@ func NewESClients(es *ESConfig) *ESClients {
 		return nil
 	}
 	log.Infof("es returned with code %d and version %s", code, info.Version.Number)
-	return &ESClients{es.Index, esclient}
+	return &ESClient{es.Index, esclient}
 }
 
-func (es *ESClients) write(event *event) error {
+func (es *ESClient) write(event *event) error {
 	add, err := es.Es.Index().Index(es.Index).Type(Type).BodyJson(event).Do(context.Background())
 	if err != nil {
 		log.Error("写入es的日志失败:", err)
