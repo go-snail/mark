@@ -13,8 +13,8 @@ const (
 type Feilds map[string]interface{}
 
 type event struct {
-	Value map[string]interface{} `value`
-	TimeStamp time.Time `timestamp`
+	Value     map[string]interface{} `value`
+	TimeStamp time.Time              `timestamp`
 }
 
 type reporter struct {
@@ -46,24 +46,10 @@ const (
 	Index  = "iot"
 )
 
-func Run(c Config) error {
-	if c.Url == "" {
-		c.Url = Url
-	}
-	if c.Scheme == "" {
-		c.Scheme = Scheme
-	}
-	if c.Index == "" {
-		c.Index = Index
-	}
-	writer := getWriter(c.Index, c.Url, c.Scheme)
-	reg.writer = writer
+func Run(i ConfigI) error {
+	reg.writer = i.Init()
 	go reg.eventLoop()
 	return nil
-}
-
-func getWriter(index, url, scheme string) Writer {
-	return NewESClient(index, url, scheme)
 }
 
 func (r *reporter) eventLoop() {

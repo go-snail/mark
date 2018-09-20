@@ -7,19 +7,19 @@ import (
 )
 
 func Test(t *testing.T) {
-		if err := Run(Config{Url:"",Scheme:"",Index:""});err != nil {
+		if err := Run(&ESConfig{Url:"http://192.168.1.6:9200",Index:"test"});err != nil {
 			fmt.Println(err)
 		}
 		mes := make(map[string]interface{})
 		mes["123"] = "qwe"
 		mes["456"] = "asdf"
 		Mark(mes)
-
+		time.Sleep(1 *  time.Second)
 }
 
 func Benchmark_mark(b *testing.B) {
 	b.StopTimer()
-	if err := Run(Config{Url:"http://192.168.1.6:9200",Scheme:"http"}); err != nil {
+	if err := Run(&ESConfig{Url:"http://192.168.1.6:9200",Index:"test"}); err != nil {
 		fmt.Println(err)
 		return
 	}
