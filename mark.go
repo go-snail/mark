@@ -13,8 +13,7 @@ const (
 type Feilds map[string]interface{}
 
 type event struct {
-	Value     map[string]interface{} `value`
-	TimeStamp time.Time              `timestamp`
+	Value     map[string]interface{} `json:"value"`
 }
 
 type reporter struct {
@@ -57,7 +56,7 @@ func (r *reporter) eventLoop() {
 func Mark(feild Feilds) {
 	evt := reg.evtBuf.Get().(*event)
 	evt.Value = feild
-	evt.TimeStamp = time.Now()
+	evt.Value["timestamp"] = time.Now()
 	select {
 	case reg.eventBus <- evt:
 	default:
