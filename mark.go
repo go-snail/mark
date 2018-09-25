@@ -1,7 +1,7 @@
 package mark
 
 import (
-	log "github.com/cihub/seelog"
+	"github.com/pkg/errors"
 	"sync"
 	"time"
 )
@@ -44,7 +44,6 @@ func (r *reporter) eventLoop() {
 		select {
 		case evt, ok := <-r.eventBus:
 			if !ok {
-				log.Error("read eventBus chan failed")
 				break
 			} else {
 				r.writer.write(evt)
@@ -60,6 +59,6 @@ func Mark(feild Feilds) {
 	select {
 	case reg.eventBus <- evt:
 	default:
-		log.Errorf("metrics eventBus is full.")
+		errors.New("metrics eventBus is full.")
 	}
 }
