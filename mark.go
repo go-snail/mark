@@ -2,8 +2,10 @@ package mark
 
 import (
 	"github.com/pkg/errors"
+	"strconv"
 	"sync"
 	"time"
+	"mark/util"
 )
 
 const (
@@ -56,6 +58,7 @@ func Mark(feild Feilds) {
 	evt := reg.evtBuf.Get().(*event)
 	evt.Value = feild
 	evt.Value["timestamp"] = time.Now()
+	evt.Value["mid"] = strconv.Itoa(int(util.GetAssetID()))
 	select {
 	case reg.eventBus <- evt:
 	default:
