@@ -10,6 +10,7 @@ const (
 	Type = "log"
 )
 
+//elastic search
 type ESClient struct {
 	Index string
 	Es    *elastic.Client

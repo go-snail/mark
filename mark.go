@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+
 const (
 	eventBufferSize = 1024 * 1000
 )
