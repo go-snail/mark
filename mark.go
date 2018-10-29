@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	eventBufferSize = 1024 * 1000
+	eventBufferSize = 1000 * 1024
 )
 
 type Feilds map[string]interface{}
@@ -49,6 +49,8 @@ func (r *reporter) eventLoop() {
 			} else {
 				r.writer.write(evt)
 			}
+		default :
+			break
 		}
 	}
 }

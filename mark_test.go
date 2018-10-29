@@ -7,7 +7,7 @@ import (
 )
 
 func Test(t *testing.T) {
-		if err := Run(&ESConfig{Url:"http://192.168.1.6:9200",Index:"test"});err != nil {
+		if err := Run(&ESConfig{Url:"http://192.168.1.51:9200",Index:"test"});err != nil {
 			fmt.Println(err)
 		}
 		mes := map[string]interface{}{
@@ -18,8 +18,11 @@ func Test(t *testing.T) {
 		"pid":       123,
 		"timestamp": time.Now(),
 		}
-		Mark(mes)
-		time.Sleep(1 *  time.Second)
+		//Mark(mes)
+	   for i := 0;i<10;i++{
+	   		Mark(mes)
+	   }
+		time.Sleep(10 *  time.Second)
 }
 
 func Benchmark_mark(b *testing.B) {
