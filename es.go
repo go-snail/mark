@@ -18,7 +18,7 @@ type ESClient struct {
 }
 
 func NewESClients(es *ESConfig) *ESClient {
-	if es.Open {
+	if !es.Close {
 		ctx := context.Background()
 		var err error
 		esclient, err := elastic.NewClient(

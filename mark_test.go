@@ -19,7 +19,7 @@ func Test(t *testing.T) {
 		"timestamp": time.Now(),
 		}
 		//Mark(mes)
-	   for i := 0;i<10;i++{
+	   for i := 0;i<10000;i++{
 	   		Mark(mes)
 	   }
 		time.Sleep(10 *  time.Second)

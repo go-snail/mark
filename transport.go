@@ -23,7 +23,7 @@ type ESConfig struct {
 	Scheme   string
 	Username string
 	Password string
-	Open     bool
+	Close    bool
 }
 
 func (EC *ESConfig) Init() Writer {
