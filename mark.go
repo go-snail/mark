@@ -49,8 +49,6 @@ func (r *reporter) eventLoop() {
 			} else {
 				r.writer.write(evt)
 			}
-		default :
-			break
 		}
 	}
 }
